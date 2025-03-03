@@ -7,8 +7,8 @@
 #define CLOCK_SELECT_PIN 0
 #define CLOCK_PIN 1
 
-#define CLOCK_FREQUENCY_1 (26'873'000)
-#define CLOCK_FREQUENCY_2 (28'656'000)
+#define CLOCK_FREQUENCY_1 (26'842'600)
+#define CLOCK_FREQUENCY_2 (28'636'360)
 
 static void clock_init(uint pin, const uint32_t frequency) {
     gpio_set_function(pin, GPIO_FUNC_PWM);
@@ -21,7 +21,7 @@ static void clock_init(uint pin, const uint32_t frequency) {
     pwm_set_gpio_level(pin, 2);
 }
 
-int __time_critical_func() main() {
+int main() {
     gpio_init(CLOCK_SELECT_PIN);
     gpio_set_dir(CLOCK_SELECT_PIN, GPIO_IN);
 
@@ -37,7 +37,7 @@ int __time_critical_func() main() {
             last_clock = current_clock;
         }
 
-        busy_wait_ms(100);
+        busy_wait_us(10);
     }
 
 }
